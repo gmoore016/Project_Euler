@@ -11,10 +11,10 @@ def main(n):
     Returns the nth prime number
     """
 
-    primes = [2]
-    num_primes = 1
+    primes = [2, 3]
+    num_primes = 2
 
-    value = 3
+    value = 5
 
     while num_primes < n:
         if is_prime(value, primes):
@@ -31,7 +31,8 @@ def is_prime(value, primes):
     When provided with a value and a list of known prime numbers
     less than that value, tests whether that value is prime
     """
-    i = 0
+    # We're skipping evens, so no need to test 2
+    i = 1
     while primes[i] * primes[i] <= value:
         if not value % primes[i]:
             return False
