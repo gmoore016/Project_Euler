@@ -19,8 +19,8 @@ def main(n):
     # must be the largest possible prime factor
 
     # Note this solution therefore requires a list of all possible
-    # prime factors of n. We know that there exists an upper bound of
-    # sqrt(n) on factors of n. Given an upper bound, we can apply
+    # prime factors of n. We know a factor cannot be greater than
+    # its product, yielding a bound. Given an upper bound, we can apply
     # a standard prime number sieve to generate a list of primes
     prime_list = gen_possible_factors(n)
 
@@ -75,7 +75,7 @@ def gen_possible_factors(n):
 
             # From there, we knock out all multiples below the bound as "not prime"
             j = 2 * i
-            while j < bound:
+            while j < bound + 1:
                 could_be_prime[j] = False
                 j = j + i
 
