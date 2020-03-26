@@ -61,11 +61,14 @@ class Triangle:
         """Finds the highest value path from the root to the base"""
         return self.root.find_best_path()
 
-    def get_root(self):
-        return self.root
-
 
 class Node:
+    """
+    Class representing a single point in the triangle
+    Each node contains a value, equal to its number, as well as a left child and right child
+    which link to the two nodes accessible from the given node.
+    Lastly, each node caches the value of its highest value path once it is found once.
+    """
     def __init__(self, value):
         self.value = value
         self.left = None
@@ -93,17 +96,10 @@ class Node:
 
                 self.cache = max(left_path, right_path) + self.value
 
+        # Return the cached solution
         return self.cache
 
-    def get_left(self):
-        return self.left
-
-    def get_right(self):
-        return self.right
-
-    def get_value(self):
-        return self.value
-
+    # Setters for the two child nodes
     def set_left(self, left):
         self.left = left
 
@@ -120,6 +116,7 @@ def main():
     # child is at index 2i while the right child is at 2i + 1
     triangle = Triangle(TREE_STRING)
 
+    # Finds the optimal path from the root to the base
     solution = triangle.find_best_path()
 
     print(solution)
