@@ -37,29 +37,39 @@ def main(seq_len):
 
     from collections import deque
 
+    # Initializes queue used to track relevant numbers
     tracked_nums = deque()
+
+    # Used for tracking optimum
     max_prod = 0
     max_index = 0
 
+    # Used for tracking the product
     running_product = 1
 
+    # For each possible sequence of length seq_len
     for i in range(len(FULLNUM) - seq_len):
+        # If the queue is full...
         if len(tracked_nums) == seq_len:
+            # ...Remove the oldest number...
             old_num = tracked_nums.popleft()
-            # If the oldest digit is a zero, we'll need to recompute the product
+            # ...and recompute the product if it was a zero...
             if not old_num:
                 running_product = 1
                 for el in tracked_nums:
                     running_product = running_product * el
 
-            # Otherwise, just modify the existing product
+            # ...otherwise just divide the running product by the number.
             else:
                 # Guaranteed to be a factor, so integer division
                 running_product = running_product // old_num
 
+        # Get the next digit, add it to the queue, and recompute the product
         next_digit = int(FULLNUM[i])
         tracked_nums.append(next_digit)
         running_product = running_product * next_digit
+
+        # Check if this is the best known substring
         if running_product > max_prod:
             max_prod = running_product
             max_index = i - seq_len + 1
