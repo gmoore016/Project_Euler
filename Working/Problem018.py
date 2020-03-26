@@ -126,22 +126,4 @@ def main():
     return solution
 
 
-def find_max_sum(root, tree, cache):
-    """
-    Given a tree stored as an array and a starting root element,
-    this function returns the maximum possible sum to the bottom
-    starting with the root element. Uses cache for dynamic
-    programming speedup
-    """
-    # If the root in question hasn't been solved yet
-    if cache[root] < 0:
-        root_val = tree[root]
-        left_branch = root_val + find_max_sum(2 * root, tree, cache)
-        right_branch = root_val + find_max_sum(2 * root + 1, tree, cache)
-
-        cache[root] = max(left_branch, right_branch)
-
-    return cache[root]
-
-
 main()
